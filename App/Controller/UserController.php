@@ -68,15 +68,15 @@ class UserController
                     $this->userRepository->saveUser($user);
                     //Message et redirection
                     $message = "Le compte : " . $user->getEmail() . " a été ajouté en BDD";
-                    header("Refresh:2; url=" . $base ."/user/register");
+                    header("Refresh:4; url=" . $base ."/register");
                 } else {
 
                     $message = "Le compte existe déja";
-                    header("Refresh:2; url=" . $base . "/user/register");
+                    header("Refresh:4; url=" . $base ."/register");
                 }
             } else {
                 $message = "Veuillez remplir tous les champs";
-                header("Refresh:2; url=" . $base . "/user/register");
+                header("Refresh:4; url=" . $base . "/register");
             }
         }
 
@@ -116,15 +116,15 @@ class UserController
                         header('Location: ' . BASE_URL . '');
                     } else {
                         $message = "Les informations de connexion ne sont pas correctes";
-                        header("Refresh:2; url=" . $base . "/user/connexion");
+                        header("Refresh:2; url=" . $base . "/login");
                     }
                 } else {
                     $message = "Les informations de connexion ne sont pas correctes";
-                    header("Refresh:2; url=" . $base . "/user/connexion");
+                    header("Refresh:2; url=" . $base . "/login");
                 }
             } else {
                 $message = "Veuillez remplir les champs";
-               header("Refresh:2; url=" . $base . "/user/connexion");
+               header("Refresh:2; url=" . $base . "/login");
             }
         }
         include_once "App/View/viewConnexion.php";
@@ -137,7 +137,7 @@ class UserController
     public function deconnexion()
     {
         session_destroy();
-        header('Location: /task/');
+        header('Location: /');
     }
 
     /**
@@ -197,14 +197,14 @@ class UserController
                             //mise à jour du mot de passe
                             $this->userRepository->updatePassword($user);
                             $message = "Le mot de passe à été mis à jour";
-                            header("Refresh:2; url=" .  $base ."/user/deconnexion");
+                            header("Refresh:2; url=" .  $base ."/logout");
                         } else {
                             $message = "L'ancien mot de passe est incorrect";
                             header("Refresh:2; url=" . $base . "/user/update/password");
                         }
                     } else {
                         $message = "Le compte n'existe pas";
-                        header("Refresh:2; url=" .  $base ."/user/deconnexion");
+                        header("Refresh:2; url=" .  $base ."/logout");
                     }
                 } else {
                     $message = "Les 2 nouveaux mots de passe ne correspondent pas";

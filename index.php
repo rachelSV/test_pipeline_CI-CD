@@ -34,19 +34,19 @@ $router->addRoute(new Route('/test/email', 'POST', 'Home', 'testEmail', ["ROLE_P
 
 /* Bloc routes déconnectées */
 
-$router->addRoute(new Route('/user/connexion', 'GET', 'User', 'connexion', ["ROLE_PUBLIC"]));
-$router->addRoute(new Route('/user/connexion', 'POST', 'User', 'connexion', ["ROLE_PUBLIC"]));
-$router->addRoute(new Route('/user/register', 'GET', 'User', 'addUser', ["ROLE_PUBLIC"]));
-$router->addRoute(new Route('/user/register', 'POST', 'User', 'addUser', ["ROLE_PUBLIC"]));
-$router->addRoute(new Route('/user/password/recover', 'GET', 'User', 'recoverPassword', ["ROLE_PUBLIC"]));
-$router->addRoute(new Route('/user/password/recover', 'POST', 'User', 'recoverPassword', ["ROLE_PUBLIC"]));
+$router->addRoute(new Route('/login', 'GET', 'User', 'connexion', ["ROLE_PUBLIC"]));
+$router->addRoute(new Route('/login', 'POST', 'User', 'connexion', ["ROLE_PUBLIC"]));
+$router->addRoute(new Route('/register', 'GET', 'User', 'addUser', ["ROLE_PUBLIC"]));
+$router->addRoute(new Route('/register', 'POST', 'User', 'addUser', ["ROLE_PUBLIC"]));
+$router->addRoute(new Route('/password/recover', 'GET', 'User', 'recoverPassword', ["ROLE_PUBLIC"]));
+$router->addRoute(new Route('/password/recover', 'POST', 'User', 'recoverPassword', ["ROLE_PUBLIC"]));
 $router->addRoute(new Route('/user/password/generate', 'GET', 'User', 'regeneratePassword', ["ROLE_PUBLIC"]));
 $router->addRoute(new Route('/user/password/generate', 'POST', 'User', 'regeneratePassword', ["ROLE_PUBLIC"]));
 
 
 /* Bloc routes connectées */
 
-$router->addRoute(new Route('/user/deconnexion', 'GET', 'User', 'deconnexion', ["ROLE_USER", "ROLE_ADMIN"]));
+$router->addRoute(new Route('/logout', 'GET', 'User', 'deconnexion', ["ROLE_USER", "ROLE_ADMIN"]));
 $router->addRoute(new Route('/category/all', 'GET', 'Category', 'showAllCategory', ["ROLE_USER", "ROLE_ADMIN"]));
 $router->addRoute(new Route('/category/delete', 'GET', 'Category', 'removeCategory', ["ROLE_ADMIN"]));
 $router->addRoute(new Route('/category/update', 'GET', 'Category', 'modifyCategory', ["ROLE_ADMIN"]));
