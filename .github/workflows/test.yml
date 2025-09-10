@@ -60,3 +60,39 @@ jobs:
       # Cypress Actions
       - name : Test Cypress
         uses: cypress-io/github-action@v6
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: e2e
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      # installer PHP
+      - name: Setup PHP CLI (Composer & outils)
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, intl, pdo_mysql, sodium, zip
+          tools: composer
+          coverage: none
+      # installer composer
+      - name: Installer dépendances Composer
+        run: composer install --no-interaction --prefer-dist
+
+      # creer le fichier env.php
+      - name: Build env.php for production
+        run: |
+          cat > env.php <<'PHP'
+          <?php
+          const BDD_LOGIN = "${{ secrets.BDD_LOGIN }}";
+          const BDD_PASSWORD = "${{ secrets.BDD_PASSWORD }}";
+          const BDD_SERVER = "${{ secrets.BDD_HOST }}";
+          const BDD_NAME = "${{ secrets.BDD_NAME }}";
+          PHP
+      # déploiement FTP
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
