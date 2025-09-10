@@ -88,6 +88,7 @@ jobs:
           const BDD_PASSWORD = "${{ secrets.BDD_PASSWORD }}";
           const BDD_SERVER = "${{ secrets.BDD_HOST }}";
           const BDD_NAME = "${{ secrets.BDD_NAME }}";
+          const BASE_URL = "/";
           PHP
       # déploiement FTP
       - name: 📂 Sync files
